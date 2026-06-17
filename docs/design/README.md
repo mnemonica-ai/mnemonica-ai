@@ -172,12 +172,28 @@ Wrapper height `64vh`. Grid layer height `70vh`, `left:-100%; right:-100%` (over
 - `heroIn`: opacity 0→1 + translateY 18px→0, 0.7s ease (staggered).
 
 ## Assets
-- `assets/logo.jpg` — the mnemonica.ai sun logo (vaporwave sun on dark square). Render with the screen-blend + circular-mask treatment above. This is the only image asset; everything else is CSS. Consider exporting a transparent PNG/SVG version later to drop the blend-mode hack.
+- The mnemonica.ai sun logo lives at `public/logo.jpg` (vaporwave sun on dark square). Rendered with the screen-blend + circular-mask treatment above. This is the only image asset; everything else is CSS. Consider exporting a transparent PNG/SVG version later to drop the blend-mode hack.
 
-## Files (in this bundle)
-- `Mnemonica Landing.dc.html` — the full landing page prototype (all sections, nav, grid-floor logic).
-- `Section Divider.dc.html` — the standalone neon divider component.
-- `assets/logo.jpg` — logo asset.
-- `support.js` — the prototype's templating runtime; **reference only, do not port.**
+---
 
-> The `.dc.html` files use `{{ }}` template holes and a `class Component extends DCLogic` block — these are prototype-runtime constructs. Read them for layout/values/logic intent; implement with idiomatic React/Next.
+## Implementation (built)
+This design has been built in the live Next.js app. This README is the design record and the code under `app/` is the source of truth; `support.js` and the bundled `assets/` copy were removed.
+
+- `Mnemonica Landing.dc.html` — the original HTML prototype, **kept for historic reference only.** It uses a `{{ }}` templating runtime that is not part of this project; do not port or run it. Read it for original layout/values/motion intent.
+
+**Stack:** Next 16 App Router (`app/`, no `src/`), React 19, Tailwind v4 (CSS-first `@theme`). Dark-only, single static route `/`.
+
+**Files:**
+- `app/layout.tsx` — `next/font` (Space Grotesk / DM Sans / Space Mono), metadata (OpenGraph + Twitter + canonical), favicon, Google Analytics via `next/script`.
+- `app/globals.css` — design tokens in `@theme`, the four keyframes, `.wrap` / `.card` / `.hero-in` helpers, `prefers-reduced-motion` guard.
+- `app/page.tsx` — composes the sections.
+- `app/_data.ts` — all copy/links as typed arrays (`apps`, `services`, `people`, `socials`, `TYPEFORM`); cards are mapped, not hand-written.
+- `app/_components/` — `Nav` (client, mobile menu), `Hero`, `Apps`, `Services`, `About`, `Contact`, `Footer`, `Divider`, `SectionHeading`, `Logo` (screen-blend + mask), `Wordmark`, `GridFloor` (rAF horizon).
+- `public/logo.jpg`, `app/favicon.ico` (multi-size RGBA from the logo).
+
+**Deliberate deviations from the handoff (all lazier, none lossy):**
+- **No shadcn/ui** — the 3 pill CTAs are plain `<a>` + Tailwind; not worth a dependency. Add if a real shadcn primitive is needed.
+- **No prototype tweak props** (`showGridFloor` / `showScanlines` / `glowIntensity`) — grid floor is hardcoded to Subtle (base 0.6). Add a toggle UI only if wanted.
+- **Google Analytics** uses `next/script` directly rather than `@next/third-parties` — no new dependency.
+
+**Known follow-ups:** OG image currently reuses the square logo (a real 1200×630 is better for link previews); both team roles say "Co-founder" pending real titles; "Prompt" app copy is a placeholder; transparent logo asset would drop the blend-mode hack.
