@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bg: #0a0612;
+  --color-panel: rgba(255, 255, 255, 0.025);
+
+  --color-text: #f3f1fa;
+  --color-body: #c5bfd8;
+  --color-body-dim: #b9b2cf;
+  --color-muted: #b3acc6;
+  --color-dim: #8b80b0;
+  --color-faint: #6f6790;
+  --color-near: #ece9f5;
+
+  --color-cyan: #38bdf8;
+  --color-cyan-light: #7dd3fc;
+  --color-purple: #a78bfa;
+  --color-purple-light: #c4b5fd;
+
+  --color-border: rgba(167, 139, 250, 0.16);
+
+  --font-sans: var(--font-dm-sans);
+  --font-grotesk: var(--font-space-grotesk);
+  --font-mono: var(--font-space-mono);
+
+  --animate-float-slow: floatSlow 6s ease-in-out infinite;
+  --animate-glow-pulse: glowPulse 5s ease-in-out infinite;
+  --animate-grid-move: gridMove 7s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 80px;
   }
 }
 
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* shared content wrapper: centered, 1140px, responsive gutters */
+.wrap {
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+
+/* cards lift + glow on hover; accent border stays inline per-card */
+.card {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px -18px rgba(124, 92, 246, 0.55);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+/* hero entrance, staggered via inline animation-delay */
+.hero-in {
+  opacity: 0;
+  animation: heroIn 0.7s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-in {
+    opacity: 1;
+    animation: none;
+  }
+  [class*="animate-"] {
+    animation: none !important;
+  }
 }
