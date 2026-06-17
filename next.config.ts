@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // pin root so Next stops picking up a stray lockfile above the repo
+  turbopack: { root: __dirname },
 };
 
 export default nextConfig;

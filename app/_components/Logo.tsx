@@ -1,6 +1,6 @@
 // Logo with the screen-blend + circular-mask treatment so the dark square
 // dissolves over the #0a0612 background. Plain <img> on purpose: mix-blend-mode
-// + mask-image apply directly to the element. ponytail: swap for a transparent
+// + mask-image apply directly to the element, swap for a transparent
 // PNG/SVG later to drop the blend hack.
 type Props = {
   size: number | string;

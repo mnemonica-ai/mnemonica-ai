@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "mnemonica",
   ],
   alternates: { canonical: "/" },
-  // ponytail: reusing the square logo as the share image. Swap for a real
+  // reusing the square logo as the share image. Swap for a real
   // 1200×630 og image when one exists.
   openGraph: {
     type: "website",
