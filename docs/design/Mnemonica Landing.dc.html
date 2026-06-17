@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0a0612; }
+  a { text-decoration: none; }
+  ::selection { background: rgba(56,189,248,0.3); }
+  @keyframes gridMove { from { background-position: 0 0, 0 0; } to { background-position: 0 80px, 0 80px; } }
+  @keyframes glowPulse { 0%,100% { opacity: 0.85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.04); } }
+  @keyframes floatSlow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scan { from { transform: translateY(0); } to { transform: translateY(6px); } }
+  @media (max-width: 820px) {
+    #navLinks { display: none !important; }
+    #navHamburger { display: flex !important; }
+  }
+</style>
+</helmet>
+
+<div style="position: relative; min-height: 100vh; background: #0a0612; color: #ece9f5; font-family: 'DM Sans', system-ui, sans-serif; overflow-x: hidden;">
+
+  <!-- ambient background glows -->
+  <div style="position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: {{ glowOpacity }};">
+    <div style="position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 760px; height: 620px; background: radial-gradient(circle at center, rgba(124,92,246,0.55), rgba(124,92,246,0) 68%); filter: blur(20px);"></div>
+    <div style="position: absolute; bottom: 8vh; left: -120px; width: 520px; height: 520px; background: radial-gradient(circle at center, rgba(56,189,248,0.28), rgba(56,189,248,0) 70%); filter: blur(30px);"></div>
+    <div style="position: absolute; bottom: 18vh; right: -140px; width: 520px; height: 520px; background: radial-gradient(circle at center, rgba(167,92,246,0.3), rgba(167,92,246,0) 70%); filter: blur(30px);"></div>
+  </div>
+
+  <!-- vaporwave perspective grid floor: horizon clamps to top of portfolio, then fades. Line always shows; grid toggles. -->
+  <div style="position: fixed; left: 0; right: 0; top: {{ floorTop }}; height: 64vh; z-index: 0; pointer-events: none; overflow: hidden; opacity: {{ floorOpacity }};">
+    <sc-if value="{{ showGridFloor }}" hint-placeholder-val="{{ true }}">
+      <div style="position: absolute; left: -100%; right: -100%; top: 0; height: 70vh; transform: perspective(340px) rotateX(64deg); transform-origin: top center; background-image: repeating-linear-gradient(to right, rgba(139,92,246,0.42) 0 1px, transparent 1px 78px), repeating-linear-gradient(to bottom, rgba(139,92,246,0.42) 0 1px, transparent 1px 78px); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 42%, transparent 88%); mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 42%, transparent 88%); animation: gridMove 7s linear infinite;"></div>
+    </sc-if>
+    <div style="position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(56,189,248,0.7), rgba(167,92,246,0.7), transparent); box-shadow: 0 0 22px 3px rgba(124,92,246,0.5);"></div>
+  </div>
+
+  <!-- scanlines overlay -->
+  <sc-if value="{{ showScanlines }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 40; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px); mix-blend-mode: overlay;"></div>
+  </sc-if>
+
+  <!-- ===== NAV ===== -->
+  <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px clamp(16px, 4vw, 40px); background: rgba(10,6,18,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(167,139,250,0.14);">
+    <a href="#top" style="display: flex; align-items: center; gap: 11px;">
+      <img src="assets/logo.jpg" alt="mnemonica.ai" style="width: 34px; height: 34px; border-radius: 8px; mix-blend-mode: screen; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%); mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%);" />
+      <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: #ece9f5;">mnemonica<span style="color: #38bdf8;">.ai</span></span>
+    </a>
+    <div id="navLinks" style="display: flex; align-items: center; gap: 30px;">
+      <a href="#apps" style="font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: #b3acc6;">apps</a>
+      <a href="#services" style="font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: #b3acc6;">services</a>
+      <a href="#about" style="font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: #b3acc6;">about</a>
+      <a href="https://991taq00kun.typeform.com/to/HHCkae8e" target="_blank" rel="noopener" style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px; color: #0a0612; background: #38bdf8; padding: 9px 18px; border-radius: 999px; box-shadow: 0 0 0 1px rgba(56,189,248,0.5), 0 6px 20px -8px rgba(56,189,248,0.8);">Work with us</a>
+    </div>
+    <button id="navHamburger" onClick="{{ toggleMenu }}" style="display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.22); cursor: pointer;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="display: block; width: 18px; height: 2px; background: #ece9f5; border-radius: 2px;"></span>
+        <span style="display: block; width: 18px; height: 2px; background: #ece9f5; border-radius: 2px;"></span>
+        <span style="display: block; width: 18px; height: 2px; background: #ece9f5; border-radius: 2px;"></span>
+      </div>
+    </button>
+  </nav>
+
+  <!-- mobile menu -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; top: 64px; left: 0; right: 0; z-index: 49; display: flex; flex-direction: column; gap: 4px; padding: 14px clamp(16px,4vw,40px) 22px; background: rgba(12,8,22,0.96); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(167,139,250,0.16);">
+      <a href="#apps" onClick="{{ closeMenu }}" style="font-family: 'Space Mono', monospace; font-size: 15px; color: #cfc9e0; padding: 12px 4px;">apps</a>
+      <a href="#services" onClick="{{ closeMenu }}" style="font-family: 'Space Mono', monospace; font-size: 15px; color: #cfc9e0; padding: 12px 4px;">services</a>
+      <a href="#about" onClick="{{ closeMenu }}" style="font-family: 'Space Mono', monospace; font-size: 15px; color: #cfc9e0; padding: 12px 4px;">about</a>
+      <a href="https://991taq00kun.typeform.com/to/HHCkae8e" target="_blank" rel="noopener" style="margin-top: 8px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #0a0612; background: #38bdf8; padding: 12px; border-radius: 999px;">Work with us</a>
+    </div>
+  </sc-if>
+
+  <!-- content -->
+  <div id="top" style="position: relative; z-index: 1;">
+
+    <!-- ===== HERO ===== -->
+    <section data-screen-label="Hero" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(130px, 18vh, 200px) 24px clamp(80px, 12vh, 140px); max-width: 980px; margin: 0 auto;">
+      <div style="animation: floatSlow 6s ease-in-out infinite;">
+        <img src="assets/logo.jpg" alt="mnemonica.ai logo" style="width: clamp(96px, 16vw, 140px); height: clamp(96px, 16vw, 140px); border-radius: 18px; mix-blend-mode: screen; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%); mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%); filter: drop-shadow(0 0 26px rgba(124,92,246,0.6)); animation: glowPulse 5s ease-in-out infinite;" />
+      </div>
+      <div style="margin-top: 30px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.34em; color: #8b80b0; text-transform: uppercase; animation: heroIn 0.7s ease both;">Indie AI Lab</div>
+      <h1 style="margin: 14px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(46px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.035em; color: #f3f1fa; animation: heroIn 0.7s ease 0.05s both;">mnemonica<span style="color: #38bdf8;">.ai</span></h1>
+      <p style="margin: 26px 0 0; max-width: 600px; font-size: clamp(18px, 2.4vw, 23px); line-height: 1.5; color: #c5bfd8; text-wrap: pretty; animation: heroIn 0.7s ease 0.12s both;">Small apps, big imagination. We design, ship and harden focused AI products — and help teams become AI-native.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 38px; animation: heroIn 0.7s ease 0.2s both;">
+        <a href="#apps" style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #0a0612; background: #38bdf8; padding: 14px 26px; border-radius: 999px; box-shadow: 0 0 0 1px rgba(56,189,248,0.5), 0 10px 30px -10px rgba(56,189,248,0.85);">Explore our apps</a>
+        <a href="https://991taq00kun.typeform.com/to/HHCkae8e" target="_blank" rel="noopener" style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #ece9f5; background: rgba(167,139,250,0.08); padding: 14px 26px; border-radius: 999px; border: 1px solid rgba(167,139,250,0.32);">Work with us →</a>
+      </div>
+    </section>
+
+    <!-- ===== APPS ===== -->
+    <section id="apps" data-screen-label="Apps" style="padding: clamp(60px,9vh,110px) clamp(16px,4vw,40px); max-width: 1140px; margin: 0 auto;">
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 36px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #38bdf8;">01 / PORTFOLIO</span>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 50px); letter-spacing: -0.03em; color: #f3f1fa;">Apps we've shipped</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px;">
+
+        <!-- Le Confidant -->
+        <a href="https://leconfidant.ai/" target="_blank" rel="noopener" style="display: flex; flex-direction: column; padding: 26px; border-radius: 18px; background: linear-gradient(180deg, rgba(52,211,153,0.07), rgba(255,255,255,0.02)); border: 1px solid rgba(52,211,153,0.22); box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(52,211,153,0.14); border: 1px solid rgba(52,211,153,0.3); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #6ee7b7;">Lc</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #8b80b0;">↗ leconfidant.ai</span>
+          </div>
+          <h3 style="margin: 18px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 21px; color: #f3f1fa;">Le Confidant</h3>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: #b9b2cf; text-wrap: pretty;">Private, AI-powered insights from your WhatsApp chats — sentiment, engagement, relationship dynamics and red flags. Then chat with your Confidant to go deeper.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #6ee7b7; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); padding: 4px 9px; border-radius: 999px;">privacy-first</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #6ee7b7; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); padding: 4px 9px; border-radius: 999px;">consumer</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #6ee7b7; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); padding: 4px 9px; border-radius: 999px;">live</span>
+          </div>
+        </a>
+
+        <!-- DeepPress -->
+        <a href="https://deeppress.mnemonica.ai/" target="_blank" rel="noopener" style="display: flex; flex-direction: column; padding: 26px; border-radius: 18px; background: linear-gradient(180deg, rgba(56,189,248,0.07), rgba(255,255,255,0.02)); border: 1px solid rgba(56,189,248,0.22);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(56,189,248,0.14); border: 1px solid rgba(56,189,248,0.3); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #7dd3fc;">Dp</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #8b80b0;">↗ deeppress.mnemonica.ai</span>
+          </div>
+          <h3 style="margin: 18px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 21px; color: #f3f1fa;">DeepPress</h3>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: #b9b2cf; text-wrap: pretty;">Talk to your sites. A public registry of WordPress, Ghost &amp; Substack sites with Model Context Protocol support — connect AI agents and chatbots to your favorite publishing platforms.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #7dd3fc; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25); padding: 4px 9px; border-radius: 999px;">mcp</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #7dd3fc; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25); padding: 4px 9px; border-radius: 999px;">infra</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #7dd3fc; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25); padding: 4px 9px; border-radius: 999px;">registry</span>
+          </div>
+        </a>
+
+        <!-- Prompt -->
+        <a href="https://prompt.mnemonica.ai/" target="_blank" rel="noopener" style="display: flex; flex-direction: column; padding: 26px; border-radius: 18px; background: linear-gradient(180deg, rgba(167,139,250,0.08), rgba(255,255,255,0.02)); border: 1px solid rgba(167,139,250,0.24);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(167,139,250,0.16); border: 1px solid rgba(167,139,250,0.32); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #c4b5fd;">Pr</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #8b80b0;">↗ prompt.mnemonica.ai</span>
+          </div>
+          <h3 style="margin: 18px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 21px; color: #f3f1fa;">Prompt</h3>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: #b9b2cf; text-wrap: pretty;">A focused workspace for crafting, testing and managing prompts — iterate fast and keep your best prompts organized and reusable.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #c4b5fd; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.28); padding: 4px 9px; border-radius: 999px;">llm</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #c4b5fd; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.28); padding: 4px 9px; border-radius: 999px;">tooling</span>
+          </div>
+        </a>
+
+        <!-- Oshepherd -->
+        <a href="https://github.com/mnemonica-ai/oshepherd" target="_blank" rel="noopener" style="display: flex; flex-direction: column; padding: 26px; border-radius: 18px; background: linear-gradient(180deg, rgba(251,191,36,0.07), rgba(255,255,255,0.02)); border: 1px solid rgba(251,191,36,0.22);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(251,191,36,0.14); border: 1px solid rgba(251,191,36,0.3); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #fcd34d;">Os</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #8b80b0;">↗ github</span>
+          </div>
+          <h3 style="margin: 18px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 21px; color: #f3f1fa;">Oshepherd</h3>
+          <p style="margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: #b9b2cf; text-wrap: pretty;">Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #fcd34d; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.26); padding: 4px 9px; border-radius: 999px;">open source</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #fcd34d; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.26); padding: 4px 9px; border-radius: 999px;">python</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; color: #fcd34d; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.26); padding: 4px 9px; border-radius: 999px;">llmops</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <dc-import name="Section Divider" hint-size="100%,28px"></dc-import>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" data-screen-label="Services" style="padding: clamp(60px,9vh,110px) clamp(16px,4vw,40px); max-width: 1140px; margin: 0 auto;">
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #38bdf8;">02 / SERVICES</span>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 50px); letter-spacing: -0.03em; color: #f3f1fa;">How we work with you</h2>
+      </div>
+      <p style="margin: 0 0 38px; max-width: 560px; font-size: 16px; line-height: 1.55; color: #b9b2cf;">Three verticals, one team. We move from idea to production — and stay to harden it.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+        <div style="display: flex; flex-direction: column; padding: 30px 26px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(167,139,250,0.16);">
+          <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: #38bdf8;">01</span>
+          <h3 style="margin: 14px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; color: #f3f1fa;">AI Products</h3>
+          <p style="margin: 4px 0 0; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #8b80b0;">PRODUCT STRATEGY</p>
+          <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: #b9b2cf; text-wrap: pretty;">From idea to shipped product. We scope, prototype and launch focused AI apps that people actually use — like the ones in our portfolio.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; padding: 30px 26px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(167,139,250,0.16);">
+          <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: #38bdf8;">02</span>
+          <h3 style="margin: 14px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; color: #f3f1fa;">AI Cybersecurity</h3>
+          <p style="margin: 4px 0 0; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #8b80b0;">RED TEAMING</p>
+          <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: #b9b2cf; text-wrap: pretty;">We stress-test your models and AI systems — adversarial prompts, jailbreaks, data leakage and abuse paths — before someone else does.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; padding: 30px 26px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(167,139,250,0.16);">
+          <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: #38bdf8;">03</span>
+          <h3 style="margin: 14px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; color: #f3f1fa;">AI Integration</h3>
+          <p style="margin: 4px 0 0; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #8b80b0;">GO AI-NATIVE</p>
+          <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: #b9b2cf; text-wrap: pretty;">We help teams become AI-native: the workflows, tooling and culture that turn AI from a novelty into a daily multiplier across the company.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <dc-import name="Section Divider" hint-size="100%,28px"></dc-import>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" data-screen-label="About" style="padding: clamp(60px,9vh,110px) clamp(16px,4vw,40px); max-width: 1140px; margin: 0 auto;">
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #38bdf8;">03 / ABOUT</span>
+        <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 50px); letter-spacing: -0.03em; color: #f3f1fa;">Built by two brothers</h2>
+      </div>
+      <p style="margin: 0 0 38px; max-width: 600px; font-size: 16px; line-height: 1.6; color: #b9b2cf; text-wrap: pretty;">Mnemonica is a small indie lab — just us. We build the products we wish existed, ship them fast, and bring that same hands-on approach to client work.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+
+        <a href="https://www.linkedin.com/in/p1nox/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 18px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(167,139,250,0.16);">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: #0a0612; background: linear-gradient(135deg, #38bdf8, #a78bfa);">RP</span>
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px; color: #f3f1fa;">Raul Pino</span>
+            <span style="font-size: 14px; color: #b9b2cf;">Co-founder</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #38bdf8;">in/p1nox ↗</span>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/jos%C3%A9-pino-carrasquero/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 18px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.025); border: 1px solid rgba(167,139,250,0.16);">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: #0a0612; background: linear-gradient(135deg, #a78bfa, #38bdf8);">JP</span>
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px; color: #f3f1fa;">Jose Pino</span>
+            <span style="font-size: 14px; color: #b9b2cf;">Co-founder</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #38bdf8;">in/jose-pino ↗</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <dc-import name="Section Divider" hint-size="100%,28px"></dc-import>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" data-screen-label="Contact" style="padding: clamp(70px,11vh,130px) clamp(16px,4vw,40px) clamp(40px,6vh,60px); max-width: 900px; margin: 0 auto; text-align: center;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #38bdf8;">04 / CONTACT</span>
+      <h2 style="margin: 14px 0 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(34px, 6vw, 62px); line-height: 1.0; letter-spacing: -0.035em; color: #f3f1fa;">Let's build something.</h2>
+      <p style="margin: 22px auto 0; max-width: 540px; font-size: 17px; line-height: 1.6; color: #c5bfd8; text-wrap: pretty;">Have a product, an idea, or an AI system that needs hardening? Tell us about it — we read every message.</p>
+      <a href="https://991taq00kun.typeform.com/to/HHCkae8e" target="_blank" rel="noopener" style="display: inline-block; margin-top: 32px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; color: #0a0612; background: #38bdf8; padding: 16px 32px; border-radius: 999px; box-shadow: 0 0 0 1px rgba(56,189,248,0.5), 0 12px 40px -10px rgba(56,189,248,0.9);">Start a conversation</a>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin-top: 44px;">
+        <a href="https://x.com/mnemonica_ai" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 13px; color: #b3acc6;">X / Twitter</a>
+        <a href="https://www.instagram.com/mnemonica_ai" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 13px; color: #b3acc6;">Instagram</a>
+        <a href="https://discord.com/invite/99xEZmZYt9" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 13px; color: #b3acc6;">Discord</a>
+        <a href="https://www.linkedin.com/company/mnemonica-ai" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 13px; color: #b3acc6;">LinkedIn</a>
+        <a href="https://github.com/mnemonica-ai" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 13px; color: #b3acc6;">GitHub</a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer style="border-top: 1px solid rgba(167,139,250,0.14); padding: 28px clamp(16px,4vw,40px); max-width: 1140px; margin: 40px auto 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.jpg" alt="" style="width: 26px; height: 26px; border-radius: 7px; mix-blend-mode: screen; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%); mask-image: radial-gradient(circle at 50% 50%, #000 56%, transparent 74%);" />
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #ece9f5;">mnemonica<span style="color: #38bdf8;">.ai</span></span>
+      </div>
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; color: #6f6790;">© 2026 mnemonica.ai · built with ☕ &amp; big imagination</span>
+    </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGridFloor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showScanlines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;glowIntensity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Subtle&quot;,&quot;options&quot;:[&quot;Subtle&quot;,&quot;Strong&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, lineY: null, lineFade: 1 };
+
+  componentDidMount() {
+    // rAF loop reading the rect — robust no matter which element actually scrolls
+    const tick = () => {
+      const apps = document.getElementById('apps');
+      const vh = window.innerHeight || 800;
+      const center = vh * 0.52;
+      const navH = 64;
+      let top = center;
+      if (apps) top = Math.min(center, apps.getBoundingClientRect().top);
+      const fade = Math.max(0, Math.min(1, (top - navH) / (center - navH)));
+      if (this.state.lineY == null || Math.abs(top - this.state.lineY) > 0.5) {
+        this.setState({ lineY: top, lineFade: fade });
+      }
+      this._raf = requestAnimationFrame(tick);
+    };
+    this._raf = requestAnimationFrame(tick);
+  }
+
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  renderVals() {
+    const intensity = this.props.glowIntensity ?? 'Subtle';
+    const base = intensity === 'Strong' ? 0.95 : 0.6;
+    return {
+      showGridFloor: this.props.showGridFloor ?? true,
+      showScanlines: this.props.showScanlines ?? false,
+      glowOpacity: intensity === 'Strong' ? 0.95 : 0.55,
+      floorTop: this.state.lineY == null ? '52vh' : this.state.lineY + 'px',
+      floorOpacity: base * this.state.lineFade,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
