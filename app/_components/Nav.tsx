@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
 import { TYPEFORM } from "../_data";
-import type { Dict, Locale } from "../_dict";
+import type { Dict } from "../_dict";
 
 function NavLinks({
   t,
@@ -42,7 +42,7 @@ const ctaStyle: React.CSSProperties = {
     "0 0 0 1px rgba(56,189,248,0.5), 0 6px 20px -8px rgba(56,189,248,0.8)",
 };
 
-export function Nav({ lang, t }: { lang: Locale; t: Dict["nav"] }) {
+export function Nav({ t }: { t: Dict["nav"] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -72,7 +72,6 @@ export function Nav({ lang, t }: { lang: Locale; t: Dict["nav"] }) {
         {/* desktop links */}
         <div className="hidden items-center min-[820px]:flex" style={{ gap: 30 }}>
           <NavLinks t={t} />
-          <LangSwitch lang={lang} />
           <a
             href={TYPEFORM}
             target="_blank"
@@ -121,7 +120,6 @@ export function Nav({ lang, t }: { lang: Locale; t: Dict["nav"] }) {
           }}
         >
           <NavLinks t={t} onClick={() => setOpen(false)} />
-          <LangSwitch lang={lang} />
           <a
             href={TYPEFORM}
             target="_blank"

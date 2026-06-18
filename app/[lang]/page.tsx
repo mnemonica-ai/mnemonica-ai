@@ -6,6 +6,7 @@ import { Services } from "../_components/Services";
 import { About } from "../_components/About";
 import { Contact } from "../_components/Contact";
 import { Footer } from "../_components/Footer";
+import { LangSwitch } from "../_components/LangSwitch";
 import { Divider } from "../_components/Divider";
 import { getDict, isLocale, locales, defaultLocale } from "../_dict";
 
@@ -25,7 +26,7 @@ export default async function Home({
   return (
     <>
       <GridFloor />
-      <Nav lang={locale} t={t.nav} />
+      <Nav t={t.nav} />
       <main style={{ position: "relative", zIndex: 1, paddingTop: 62 }}>
         <Hero t={t.hero} />
         <Apps t={t.apps} />
@@ -37,6 +38,7 @@ export default async function Home({
         <Contact t={t.contact} />
         <Footer t={t.footer} />
       </main>
+      <LangSwitch lang={locale} />
     </>
   );
 }
