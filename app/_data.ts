@@ -45,6 +45,22 @@ export const apps: App[] = [
     accent: "#fbbf24",
     accentText: "#fcd34d",
   },
+  {
+    name: "Zen Tetris",
+    url: "https://zen-tetris.vercel.app/",
+    label: "zen-tetris.vercel.app",
+    monogram: "Zt",
+    accent: "#2dd4bf",
+    accentText: "#5eead4",
+  },
+  {
+    name: "Marcapágina",
+    url: "https://www.marcapagina.page/",
+    label: "marcapagina.page",
+    monogram: "Mp",
+    accent: "#fb7185",
+    accentText: "#fda4af",
+  },
 ];
 
 export type Service = { num: string };

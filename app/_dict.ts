@@ -45,6 +45,14 @@ export const dictionaries = {
           copy: "Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.",
           tags: ["open source", "python", "llmops"],
         },
+        {
+          copy: "A mindful take on the classic puzzle game — Tetris reimagined with a calm aesthetic and relaxing pace. Drop blocks, clear lines, unwind.",
+          tags: ["game", "web", "for fun"],
+        },
+        {
+          copy: "A Spanish-language literary magazine — short stories, author city guides, book previews, a literary horoscope and plenty of bookish humor for reading lovers.",
+          tags: ["content", "literature", "live"],
+        },
       ],
     },
     services: {
@@ -121,6 +129,14 @@ export const dictionaries = {
         {
           copy: "Servicio FastAPI de código abierto que usa Celery + Redis para orquestar múltiples servidores Ollama como workers. Apunta cualquier cliente Ollama a un único endpoint.",
           tags: ["código abierto", "python", "llmops"],
+        },
+        {
+          copy: "Una versión consciente del clásico juego de puzzle — Tetris reimaginado con una estética serena y un ritmo relajante. Suelta bloques, completa líneas, desconéctate.",
+          tags: ["juego", "web", "diversión"],
+        },
+        {
+          copy: "Una revista de literatura en español — cuentos, guías de ciudades de autores, adelantos de libros, un horóscopo literario y mucho humor para amantes de la lectura.",
+          tags: ["contenido", "literatura", "en vivo"],
         },
       ],
     },
