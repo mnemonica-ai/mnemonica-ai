@@ -4,6 +4,7 @@ import Script from "next/script";
 import "../globals.css";
 import { getDict, isLocale, defaultLocale } from "../_dict";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const GA_ID = "G-150YHSN513";
 
@@ -88,6 +89,7 @@ export default async function RootLayout({
       <body>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
