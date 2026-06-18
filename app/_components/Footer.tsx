@@ -1,7 +1,7 @@
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
 
-export function Footer() {
+export function Footer({ t }: { t: string }) {
   return (
     <footer
       className="flex flex-wrap items-center justify-between"
@@ -18,7 +18,7 @@ export function Footer() {
         <Wordmark size={15} />
       </div>
       <span className="font-mono" style={{ fontSize: 12, color: "#6f6790" }}>
-        © 2026 mnemonica.ai · built with ☕ & big imagination
+        {t}
       </span>
     </footer>
   );

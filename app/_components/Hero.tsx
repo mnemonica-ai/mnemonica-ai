@@ -1,12 +1,13 @@
 import { Logo } from "./Logo";
 import { TYPEFORM } from "../_data";
+import type { Dict } from "../_dict";
 
 // Each block fades/translates up, staggered.
 function block(delay: number): React.CSSProperties {
   return { animationDelay: `${delay}s` };
 }
 
-export function Hero() {
+export function Hero({ t }: { t: Dict["hero"] }) {
   return (
     <header
       className="flex flex-col items-center text-center"
@@ -31,7 +32,7 @@ export function Hero() {
           color: "#8b80b0",
         }}
       >
-        Indie AI Lab
+        {t.eyebrow}
       </p>
 
       <h1
@@ -59,8 +60,7 @@ export function Hero() {
           textWrap: "pretty",
         }}
       >
-        Small apps, big imagination. We design, ship and harden focused AI
-        products — and help teams become AI-native.
+        {t.tagline}
       </p>
 
       <div
@@ -81,7 +81,7 @@ export function Hero() {
               "0 0 0 1px rgba(56,189,248,0.5), 0 6px 20px -8px rgba(56,189,248,0.8)",
           }}
         >
-          Explore our apps
+          {t.ctaPrimary}
         </a>
         <a
           href={TYPEFORM}
@@ -98,7 +98,7 @@ export function Hero() {
             borderRadius: 999,
           }}
         >
-          Work with us →
+          {t.ctaSecondary}
         </a>
       </div>
     </header>

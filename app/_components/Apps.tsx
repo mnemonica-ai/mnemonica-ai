@@ -1,7 +1,16 @@
 import { SectionHeading } from "./SectionHeading";
 import { apps, type App } from "../_data";
+import type { Dict } from "../_dict";
 
-function Card({ app }: { app: App }) {
+function Card({
+  app,
+  copy,
+  tags,
+}: {
+  app: App;
+  copy: string;
+  tags: readonly string[];
+}) {
   return (
     <a
       href={app.url}
@@ -50,11 +59,11 @@ function Card({ app }: { app: App }) {
           textWrap: "pretty",
         }}
       >
-        {app.copy}
+        {copy}
       </p>
 
       <div className="flex flex-wrap" style={{ gap: 8, marginTop: 18 }}>
-        {app.tags.map((t) => (
+        {tags.map((t) => (
           <span
             key={t}
             className="font-mono"
@@ -75,10 +84,10 @@ function Card({ app }: { app: App }) {
   );
 }
 
-export function Apps() {
+export function Apps({ t }: { t: Dict["apps"] }) {
   return (
     <section id="apps" className="wrap" style={{ paddingBlock: 40 }}>
-      <SectionHeading eyebrow="01 / PORTFOLIO" title="Apps we've shipped" />
+      <SectionHeading eyebrow={t.eyebrow} title={t.title} />
       <div
         style={{
           display: "grid",
@@ -86,8 +95,8 @@ export function Apps() {
           gap: 20,
         }}
       >
-        {apps.map((a) => (
-          <Card key={a.name} app={a} />
+        {apps.map((a, i) => (
+          <Card key={a.name} app={a} copy={t.items[i].copy} tags={t.items[i].tags} />
         ))}
       </div>
     </section>

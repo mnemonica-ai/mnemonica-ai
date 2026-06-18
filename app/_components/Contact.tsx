@@ -1,6 +1,7 @@
 import { TYPEFORM, socials } from "../_data";
+import type { Dict } from "../_dict";
 
-export function Contact() {
+export function Contact({ t }: { t: Dict["contact"] }) {
   return (
     <section
       id="contact"
@@ -13,7 +14,7 @@ export function Contact() {
       }}
     >
       <span className="font-mono text-cyan" style={{ fontSize: 12, letterSpacing: "0.22em" }}>
-        04 / CONTACT
+        {t.eyebrow}
       </span>
       <h2
         className="font-grotesk font-bold"
@@ -25,7 +26,7 @@ export function Contact() {
           color: "#f3f1fa",
         }}
       >
-        Let&apos;s build something.
+        {t.title}
       </h2>
       <p
         style={{
@@ -36,8 +37,7 @@ export function Contact() {
           maxWidth: 540,
         }}
       >
-        Have a product, an idea, or an AI system that needs hardening? Tell us
-        about it — we read every message.
+        {t.body}
       </p>
 
       <a
@@ -57,7 +57,7 @@ export function Contact() {
             "0 0 0 1px rgba(56,189,248,0.5), 0 12px 40px -10px rgba(56,189,248,0.9)",
         }}
       >
-        Start a conversation
+        {t.cta}
       </a>
 
       <div

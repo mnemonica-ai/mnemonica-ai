@@ -4,14 +4,20 @@ import { useState } from "react";
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
 import { TYPEFORM } from "../_data";
+import type { Dict, Locale } from "../_dict";
 
-const links = [
-  { label: "apps", href: "#apps" },
-  { label: "services", href: "#services" },
-  { label: "about", href: "#about" },
-];
-
-function NavLinks({ onClick }: { onClick?: () => void }) {
+function NavLinks({
+  t,
+  onClick,
+}: {
+  t: Dict["nav"];
+  onClick?: () => void;
+}) {
+  const links = [
+    { label: t.links.apps, href: "#apps" },
+    { label: t.links.services, href: "#services" },
+    { label: t.links.about, href: "#about" },
+  ];
   return links.map((l) => (
     <a
       key={l.href}
@@ -36,7 +42,7 @@ const ctaStyle: React.CSSProperties = {
     "0 0 0 1px rgba(56,189,248,0.5), 0 6px 20px -8px rgba(56,189,248,0.8)",
 };
 
-export function Nav() {
+export function Nav({ lang, t }: { lang: Locale; t: Dict["nav"] }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -65,7 +71,8 @@ export function Nav() {
 
         {/* desktop links */}
         <div className="hidden items-center min-[820px]:flex" style={{ gap: 30 }}>
-          <NavLinks />
+          <NavLinks t={t} />
+          <LangSwitch lang={lang} />
           <a
             href={TYPEFORM}
             target="_blank"
@@ -73,7 +80,7 @@ export function Nav() {
             className="font-grotesk transition-shadow"
             style={ctaStyle}
           >
-            Work with us
+            {t.cta}
           </a>
         </div>
 
@@ -113,7 +120,8 @@ export function Nav() {
             borderBottom: "1px solid rgba(167,139,250,0.14)",
           }}
         >
-          <NavLinks onClick={() => setOpen(false)} />
+          <NavLinks t={t} onClick={() => setOpen(false)} />
+          <LangSwitch lang={lang} />
           <a
             href={TYPEFORM}
             target="_blank"
@@ -122,7 +130,7 @@ export function Nav() {
             className="font-grotesk text-center"
             style={ctaStyle}
           >
-            Work with us
+            {t.cta}
           </a>
         </div>
       )}

@@ -1,10 +1,11 @@
 import { SectionHeading } from "./SectionHeading";
 import { people } from "../_data";
+import type { Dict } from "../_dict";
 
-export function About() {
+export function About({ t }: { t: Dict["about"] }) {
   return (
     <section id="about" className="wrap" style={{ paddingBlock: 40 }}>
-      <SectionHeading eyebrow="03 / ABOUT" title="Built by two brothers" />
+      <SectionHeading eyebrow={t.eyebrow} title={t.title} />
       <p
         style={{
           fontSize: 16,
@@ -15,9 +16,7 @@ export function About() {
           marginTop: -16,
         }}
       >
-        Mnemonica is a small indie lab — just us. We build the products we wish
-        existed, ship them fast, and bring that same hands-on approach to client
-        work.
+        {t.intro}
       </p>
 
       <div
@@ -27,7 +26,7 @@ export function About() {
           gap: 20,
         }}
       >
-        {people.map((p) => (
+        {people.map((p, i) => (
           <a
             key={p.name}
             href={p.url}
@@ -59,7 +58,7 @@ export function About() {
               <span className="font-grotesk" style={{ fontSize: 18, fontWeight: 600, color: "#f3f1fa" }}>
                 {p.name}
               </span>
-              <span style={{ fontSize: 14, color: "#b9b2cf" }}>{p.role}</span>
+              <span style={{ fontSize: 14, color: "#b9b2cf" }}>{t.roles[i]}</span>
               <span className="font-mono" style={{ fontSize: 12, color: "#38bdf8", marginTop: 4 }}>
                 {p.handle}
               </span>

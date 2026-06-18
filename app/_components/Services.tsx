@@ -1,10 +1,11 @@
 import { SectionHeading } from "./SectionHeading";
 import { services } from "../_data";
+import type { Dict } from "../_dict";
 
-export function Services() {
+export function Services({ t }: { t: Dict["services"] }) {
   return (
     <section id="services" className="wrap" style={{ paddingBlock: 40 }}>
-      <SectionHeading eyebrow="02 / SERVICES" title="How we work with you" />
+      <SectionHeading eyebrow={t.eyebrow} title={t.title} />
       <p
         style={{
           fontSize: 16,
@@ -15,8 +16,7 @@ export function Services() {
           lineHeight: 1.6,
         }}
       >
-        Three verticals, one team. We move from idea to production — and stay to
-        harden it.
+        {t.intro}
       </p>
 
       <div
@@ -26,7 +26,7 @@ export function Services() {
           gap: 20,
         }}
       >
-        {services.map((s) => (
+        {services.map((s, i) => (
           <div
             key={s.num}
             className="card flex flex-col"
@@ -44,16 +44,16 @@ export function Services() {
               className="font-grotesk"
               style={{ marginTop: 14, fontSize: 22, fontWeight: 600, color: "#f3f1fa" }}
             >
-              {s.title}
+              {t.items[i].title}
             </h3>
             <span
               className="font-mono uppercase"
               style={{ marginTop: 8, fontSize: 12, letterSpacing: "0.04em", color: "#8b80b0" }}
             >
-              {s.kicker}
+              {t.items[i].kicker}
             </span>
             <p style={{ marginTop: 16, fontSize: 15, lineHeight: 1.6, color: "#b9b2cf" }}>
-              {s.body}
+              {t.items[i].body}
             </p>
           </div>
         ))}
