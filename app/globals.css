@@ -74,6 +74,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* offset anchor jumps so the 62px sticky topbar doesn't cover section titles */
+section[id] {
+  scroll-margin-top: 62px;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
