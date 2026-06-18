@@ -3,6 +3,7 @@ import { Space_Grotesk, DM_Sans, Space_Mono } from "next/font/google";
 import Script from "next/script";
 import "../globals.css";
 import { getDict, isLocale, defaultLocale } from "../_dict";
+import { Analytics } from "@vercel/analytics/next"
 
 const GA_ID = "G-150YHSN513";
 
@@ -84,7 +85,10 @@ export default async function RootLayout({
       lang={locale}
       className={`${grotesk.variable} ${dmSans.variable} ${spaceMono.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
