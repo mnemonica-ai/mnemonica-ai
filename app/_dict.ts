@@ -42,8 +42,20 @@ export const dictionaries = {
           tags: ["llm", "tooling"],
         },
         {
+          copy: "Fan-made, open-source desktop player for the Aadam Jacobs Collection on the Internet Archive — built with Tauri, React and TypeScript, with multi-theme UI and a custom HTML5 audio engine.",
+          tags: ["desktop", "open source", "music"],
+        },
+        {
           copy: "Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.",
           tags: ["open source", "python", "llmops"],
+        },
+        {
+          copy: "Hands-on examples for red teaming latent spaces and protecting LLM apps — a notebook-driven toolkit for exploring AI security workflows.",
+          tags: ["ai security", "red teaming", "llm"],
+        },
+        {
+          copy: "Capstone research project exploring ensembles of Generative Adversarial Networks as a data augmentation technique for Alzheimer's MRI research.",
+          tags: ["research", "gan", "health ai"],
         },
         {
           copy: "A mindful take on the classic puzzle game — Tetris reimagined with a calm aesthetic and relaxing pace. Drop blocks, clear lines, unwind.",
@@ -127,8 +139,20 @@ export const dictionaries = {
           tags: ["llm", "herramientas"],
         },
         {
+          copy: "Reproductor de escritorio, fan-made y de código abierto para la Aadam Jacobs Collection en Internet Archive — hecho con Tauri, React y TypeScript, con UI multi-tema y motor de audio HTML5 propio.",
+          tags: ["desktop", "código abierto", "música"],
+        },
+        {
           copy: "Servicio FastAPI de código abierto que usa Celery + Redis para orquestar múltiples servidores Ollama como workers. Apunta cualquier cliente Ollama a un único endpoint.",
           tags: ["código abierto", "python", "llmops"],
+        },
+        {
+          copy: "Ejemplos prácticos para hacer red teaming de espacios latentes y proteger apps con LLMs — un toolkit basado en notebooks para explorar flujos de ciberseguridad de IA.",
+          tags: ["seguridad IA", "red teaming", "llm"],
+        },
+        {
+          copy: "Proyecto de investigación capstone que explora ensambles de Generative Adversarial Networks como técnica de aumento de datos para investigación de Alzheimer con MRIs.",
+          tags: ["investigación", "gan", "salud IA"],
         },
         {
           copy: "Una versión consciente del clásico juego de puzzle — Tetris reimaginado con una estética serena y un ritmo relajante. Suelta bloques, completa líneas, desconéctate.",
