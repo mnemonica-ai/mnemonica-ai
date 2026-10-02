@@ -4,19 +4,23 @@ import { useState } from "react";
 import { Logo } from "./Logo";
 import { Wordmark } from "./Wordmark";
 import { TYPEFORM } from "../_data";
-import type { Dict } from "../_dict";
+import type { Dict, Locale } from "../_dict";
 
+// Links point at /{lang}#section so they also work from subpages; on the
+// homepage the browser treats them as same-page fragment jumps.
 function NavLinks({
   t,
+  lang,
   onClick,
 }: {
   t: Dict["nav"];
+  lang: Locale;
   onClick?: () => void;
 }) {
   const links = [
-    { label: t.links.apps, href: "#apps" },
-    { label: t.links.services, href: "#services" },
-    { label: t.links.about, href: "#about" },
+    { label: t.links.apps, href: `/${lang}#apps` },
+    { label: t.links.services, href: `/${lang}#services` },
+    { label: t.links.about, href: `/${lang}#about` },
   ];
   return links.map((l) => (
     <a
@@ -42,7 +46,7 @@ const ctaStyle: React.CSSProperties = {
     "0 0 0 1px rgba(56,189,248,0.5), 0 6px 20px -8px rgba(56,189,248,0.8)",
 };
 
-export function Nav({ t }: { t: Dict["nav"] }) {
+export function Nav({ t, lang }: { t: Dict["nav"]; lang: Locale }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -64,14 +68,15 @@ export function Nav({ t }: { t: Dict["nav"] }) {
           margin: "0 auto",
         }}
       >
-        <a href="#" className="flex items-center" style={{ gap: 10 }}>
+        {/* "#top" scrolls to the top per the HTML spec, no element needed */}
+        <a href={`/${lang}#top`} className="flex items-center" style={{ gap: 10 }}>
           <Logo size={34} radius={8} />
           <Wordmark size={19} />
         </a>
 
         {/* desktop links */}
         <div className="hidden items-center min-[820px]:flex" style={{ gap: 30 }}>
-          <NavLinks t={t} />
+          <NavLinks t={t} lang={lang} />
           <a
             href={TYPEFORM}
             target="_blank"
@@ -119,7 +124,7 @@ export function Nav({ t }: { t: Dict["nav"] }) {
             borderBottom: "1px solid rgba(167,139,250,0.14)",
           }}
         >
-          <NavLinks t={t} onClick={() => setOpen(false)} />
+          <NavLinks t={t} lang={lang} onClick={() => setOpen(false)} />
           <a
             href={TYPEFORM}
             target="_blank"

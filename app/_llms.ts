@@ -1,4 +1,4 @@
-import { apps, people, socials, TYPEFORM } from "./_data";
+import { apps, articles, people, services, socials, TYPEFORM } from "./_data";
 import { dictionaries } from "./_dict";
 
 // The /llms.txt template (llmstxt.org spec). Edit the copy here; the route at
@@ -11,9 +11,12 @@ export function llmsText(): string {
     .join("\n");
   const serviceLines = t.services.items
     .map(
-      (s) =>
-        `- [${s.title}](https://mnemonica.ai/en#services) (${s.kicker}): ${s.body}`,
+      (s, i) =>
+        `- [${s.title}](https://mnemonica.ai/en/${services[i].slugs.en}) (${s.kicker}): ${s.body}`,
     )
+    .join("\n");
+  const articleLines = articles
+    .map((a, i) => `- [${t.articles.items[i].title}](${a.url}): ${t.articles.items[i].body}`)
     .join("\n");
   const peopleLines = people
     .map((p) => `- [${p.name}](${p.url}) — Co-founder`)
@@ -35,6 +38,9 @@ ${appLines}
 
 ## Services
 ${serviceLines}
+
+## Articles
+${articleLines}
 
 ## About
 ${peopleLines}

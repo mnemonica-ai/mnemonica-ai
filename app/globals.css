@@ -102,6 +102,21 @@ body {
   border-color: rgba(167, 139, 250, 0.4);
 }
 
+/* horizontal scroll-snap row; padding leaves room for the card hover lift */
+.slider {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(340px, 85%);
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: 8px 16px;
+  scrollbar-color: rgba(167, 139, 250, 0.3) transparent;
+}
+.slider > * {
+  scroll-snap-align: start;
+}
+
 /* hero entrance, staggered via inline animation-delay */
 .hero-in {
   opacity: 0;

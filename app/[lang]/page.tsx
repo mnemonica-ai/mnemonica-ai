@@ -8,6 +8,7 @@ import { Contact } from "../_components/Contact";
 import { Footer } from "../_components/Footer";
 import { LangSwitch } from "../_components/LangSwitch";
 import { Divider } from "../_components/Divider";
+import { Articles } from "../_components/Articles";
 import { getDict, isLocale, locales, defaultLocale } from "../_dict";
 
 export function generateStaticParams() {
@@ -26,12 +27,14 @@ export default async function Home({
   return (
     <>
       <GridFloor />
-      <Nav t={t.nav} />
+      <Nav t={t.nav} lang={locale} />
       <main style={{ position: "relative", zIndex: 1, paddingTop: 62 }}>
         <Hero t={t.hero} />
         <Apps t={t.apps} />
         <Divider />
-        <Services t={t.services} />
+        <Services t={t.services} lang={locale} />
+        <Divider />
+        <Articles t={t.articles} />
         <Divider />
         <About t={t.about} />
         <Divider />

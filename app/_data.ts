@@ -87,9 +87,36 @@ export const apps: App[] = [
   },
 ];
 
-export type Service = { num: string };
+export type Service = {
+  num: string;
+  slugs: { en: string; es: string }; // /[lang]/[slug] service page
+  examples: string[]; // app names shown as portfolio examples
+};
 
-export const services: Service[] = [{ num: "01" }, { num: "02" }, { num: "03" }];
+export const services: Service[] = [
+  {
+    num: "01",
+    slugs: { en: "ai-product-development", es: "desarrollo-productos-ia" },
+    examples: ["Le Confidant", "DeepPress", "Prompt"],
+  },
+  {
+    num: "02",
+    slugs: { en: "ai-red-teaming", es: "red-teaming-ia" },
+    examples: ["Red Teaming Latent Spaces", "Le Confidant"],
+  },
+  {
+    num: "03",
+    slugs: { en: "ai-integration-consulting", es: "consultoria-integracion-ia" },
+    examples: ["Oshepherd", "DeepPress", "Prompt"],
+  },
+];
+
+// Blog/article links for the homepage slider. Copy lives in _dict.ts.
+export type Article = { url: string; label: string; accent: string };
+
+export const articles: Article[] = [
+  { url: "https://leconfidant.ai/articles", label: "leconfidant.ai", accent: "#34d399" },
+];
 
 export type Person = {
   initials: string;

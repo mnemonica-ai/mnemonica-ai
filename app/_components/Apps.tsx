@@ -2,7 +2,7 @@ import { SectionHeading } from "./SectionHeading";
 import { apps, type App } from "../_data";
 import type { Dict } from "../_dict";
 
-function Card({
+export function Card({
   app,
   copy,
   tags,

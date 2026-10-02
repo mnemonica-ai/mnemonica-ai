@@ -1,8 +1,14 @@
 import { locales, type Locale } from "../_dict";
 
 // Fixed bottom-right pill so language is reachable from anywhere without
-// crowding the nav.
-export function LangSwitch({ lang }: { lang: Locale }) {
+// crowding the nav. Subpages pass `paths` so switching keeps the same page.
+export function LangSwitch({
+  lang,
+  paths,
+}: {
+  lang: Locale;
+  paths?: Record<Locale, string>;
+}) {
   return (
     <div
       className="fixed flex items-center font-mono uppercase z-50"
@@ -23,7 +29,7 @@ export function LangSwitch({ lang }: { lang: Locale }) {
       {locales.map((l) => (
         <a
           key={l}
-          href={`/${l}`}
+          href={paths?.[l] ?? `/${l}`}
           hrefLang={l}
           aria-current={l === lang ? "true" : undefined}
           className="transition-colors"

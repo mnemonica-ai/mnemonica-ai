@@ -1,8 +1,8 @@
 import { SectionHeading } from "./SectionHeading";
 import { services } from "../_data";
-import type { Dict } from "../_dict";
+import type { Dict, Locale } from "../_dict";
 
-export function Services({ t }: { t: Dict["services"] }) {
+export function Services({ t, lang }: { t: Dict["services"]; lang: Locale }) {
   return (
     <section id="services" className="wrap" style={{ paddingBlock: 40 }}>
       <SectionHeading eyebrow={t.eyebrow} title={t.title} />
@@ -27,8 +27,9 @@ export function Services({ t }: { t: Dict["services"] }) {
         }}
       >
         {services.map((s, i) => (
-          <div
+          <a
             key={s.num}
+            href={`/${lang}/${s.slugs[lang]}`}
             className="card flex flex-col"
             style={{
               padding: "30px 26px",
@@ -55,7 +56,13 @@ export function Services({ t }: { t: Dict["services"] }) {
             <p style={{ marginTop: 16, fontSize: 15, lineHeight: 1.6, color: "#b9b2cf" }}>
               {t.items[i].body}
             </p>
-          </div>
+            <span
+              className="font-mono"
+              style={{ marginTop: "auto", paddingTop: 18, fontSize: 13, color: "#38bdf8" }}
+            >
+              {t.more}
+            </span>
+          </a>
         ))}
       </div>
     </section>
