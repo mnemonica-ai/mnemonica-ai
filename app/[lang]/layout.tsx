@@ -9,6 +9,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const GA_ID = "G-150YHSN513";
 
+// Unknown locales (/xx, /xx/opengraph-image) 404 instead of rendering on demand.
+export const dynamicParams = false;
+
 const grotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
