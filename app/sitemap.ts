@@ -8,8 +8,9 @@ const SITE = "https://mnemonica.ai";
 function entries(path: (l: Locale) => string): MetadataRoute.Sitemap {
   const languages = Object.fromEntries(locales.map((l) => [l, `${SITE}${path(l)}`]));
   return locales.map((l) => ({
+    // ponytail: no lastModified — "now" on every request teaches Google to
+    // ignore it. Add real per-page dates if content starts changing often.
     url: `${SITE}${path(l)}`,
-    lastModified: new Date(),
     alternates: { languages },
   }));
 }
