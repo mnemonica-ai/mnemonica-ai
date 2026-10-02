@@ -18,8 +18,14 @@ export function proxy(req: NextRequest) {
   );
   if (hasLocale) return;
 
-  req.nextUrl.pathname = `/${pickLocale(req)}${pathname}`;
-  return NextResponse.redirect(req.nextUrl);
+  const locale = pickLocale(req);
+  req.nextUrl.pathname = `/${locale}${pathname}`;
+  // Default locale (incl. Googlebot, which sends no Accept-Language) gets a
+  // permanent redirect: with a 307 Google keeps "/" as canonical and flags
+  // /en as a duplicate. Other locales stay temporary since they're per-visitor.
+  const res = NextResponse.redirect(req.nextUrl, locale === defaultLocale ? 308 : 307);
+  res.headers.set("Vary", "Accept-Language");
+  return res;
 }
 
 export const config = {
