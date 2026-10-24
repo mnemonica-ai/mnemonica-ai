@@ -38,16 +38,12 @@ export const dictionaries = {
           tags: ["mcp", "infra", "registry"],
         },
         {
-          copy: "A focused workspace for crafting, testing and managing prompts — iterate fast and keep your best prompts organized and reusable.",
-          tags: ["llm", "tooling"],
+          copy: "Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.",
+          tags: ["open source", "python", "llmops"],
         },
         {
           copy: "Fan-made, open-source desktop player for the Aadam Jacobs Collection on the Internet Archive — built with Tauri, React and TypeScript, with a multi-theme UI and a custom HTML5 audio engine.",
           tags: ["desktop", "open source", "music"],
-        },
-        {
-          copy: "Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.",
-          tags: ["open source", "python", "llmops"],
         },
         {
           copy: "Hands-on examples for red teaming latent spaces and protecting LLM apps — a notebook-driven toolkit for exploring AI security workflows.",
@@ -331,16 +327,12 @@ export const dictionaries = {
           tags: ["mcp", "infraestructura", "registro"],
         },
         {
-          copy: "Un espacio de trabajo enfocado para crear, probar y gestionar prompts — itera rápido y mantén tus mejores prompts organizados y reutilizables.",
-          tags: ["llm", "herramientas"],
+          copy: "Servicio FastAPI de código abierto que usa Celery + Redis para orquestar múltiples servidores Ollama como workers. Apunta cualquier cliente Ollama a un único endpoint.",
+          tags: ["código abierto", "python", "llmops"],
         },
         {
           copy: "Reproductor de escritorio hecho por fans y de código abierto para la Aadam Jacobs Collection de Internet Archive — construido con Tauri, React y TypeScript, con interfaz multitema y motor de audio HTML5 propio.",
           tags: ["desktop", "código abierto", "música"],
-        },
-        {
-          copy: "Servicio FastAPI de código abierto que usa Celery + Redis para orquestar múltiples servidores Ollama como workers. Apunta cualquier cliente Ollama a un único endpoint.",
-          tags: ["código abierto", "python", "llmops"],
         },
         {
           copy: "Ejemplos prácticos para hacer red teaming de espacios latentes y proteger apps con LLMs — un toolkit basado en notebooks para explorar flujos de ciberseguridad de IA.",

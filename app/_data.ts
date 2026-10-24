@@ -30,12 +30,12 @@ export const apps: App[] = [
     accentText: "#7dd3fc",
   },
   {
-    name: "Prompt",
-    url: "https://prompt.mnemonica.ai/",
-    label: "prompt.mnemonica.ai",
-    monogram: "Pr",
-    accent: "#a78bfa",
-    accentText: "#c4b5fd",
+    name: "Oshepherd",
+    url: "https://github.com/mnemonica-ai/oshepherd",
+    label: "github",
+    monogram: "Os",
+    accent: "#fbbf24",
+    accentText: "#fcd34d",
   },
   {
     name: "Taper Player",
@@ -44,14 +44,6 @@ export const apps: App[] = [
     monogram: "Tp",
     accent: "#f97316",
     accentText: "#fdba74",
-  },
-  {
-    name: "Oshepherd",
-    url: "https://github.com/mnemonica-ai/oshepherd",
-    label: "github",
-    monogram: "Os",
-    accent: "#fbbf24",
-    accentText: "#fcd34d",
   },
   {
     name: "Red Teaming Latent Spaces",
@@ -97,7 +89,7 @@ export const services: Service[] = [
   {
     num: "01",
     slugs: { en: "ai-product-development", es: "desarrollo-productos-ia" },
-    examples: ["Le Confidant", "DeepPress", "Prompt"],
+    examples: ["Le Confidant", "DeepPress"],
   },
   {
     num: "02",
@@ -107,7 +99,7 @@ export const services: Service[] = [
   {
     num: "03",
     slugs: { en: "ai-integration-consulting", es: "consultoria-integracion-ia" },
-    examples: ["Oshepherd", "DeepPress", "Prompt"],
+    examples: ["Oshepherd", "DeepPress"],
   },
 ];
 
