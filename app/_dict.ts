@@ -105,6 +105,21 @@ export const dictionaries = {
           title: "WhatsApp chat analysis guides",
           body: "How to export a WhatsApp chat and analyze it with AI, which models do it, what happens to your data, and what the statistics actually mean.",
         },
+        {
+          source: "Substack",
+          title: "The mnemonica.ai newsletter",
+          body: "Notes from the lab: what we're building, what broke, and what we learned shipping AI products.",
+        },
+        {
+          source: "DEV",
+          title: "Engineering posts on dev.to",
+          body: "Hands-on technical write-ups on LLM apps, MCP, red teaming and the tooling behind our products.",
+        },
+        {
+          source: "Medium",
+          title: "Essays on Medium",
+          body: "Longer pieces on AI products, security and how small teams can work AI-native.",
+        },
       ],
     },
     servicePage: {
@@ -393,6 +408,21 @@ export const dictionaries = {
           source: "Le Confidant",
           title: "Guías de análisis de chats de WhatsApp",
           body: "Cómo exportar y analizar un chat de WhatsApp con IA, qué modelos lo hacen, qué pasa con tus datos y qué significan realmente las estadísticas.",
+        },
+        {
+          source: "Substack",
+          title: "La newsletter de mnemonica.ai",
+          body: "Notas del laboratorio: qué construimos, qué se rompió y qué aprendimos lanzando productos de IA.",
+        },
+        {
+          source: "DEV",
+          title: "Artículos técnicos en dev.to",
+          body: "Artículos prácticos sobre apps con LLMs, MCP, red teaming y las herramientas detrás de nuestros productos.",
+        },
+        {
+          source: "Medium",
+          title: "Ensayos en Medium",
+          body: "Textos más largos sobre productos de IA, seguridad y cómo los equipos pequeños pueden trabajar de forma AI-native.",
         },
       ],
     },

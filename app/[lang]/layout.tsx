@@ -3,7 +3,7 @@ import { Space_Grotesk, DM_Sans, Space_Mono } from "next/font/google";
 import Script from "next/script";
 import "../globals.css";
 import { getDict, isLocale, defaultLocale } from "../_dict";
-import { socials } from "../_data";
+import { articles, socials } from "../_data";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -90,7 +90,7 @@ export default async function RootLayout({
     url: "https://mnemonica.ai",
     logo: "https://mnemonica.ai/logo.jpg",
     description,
-    sameAs: socials.map((s) => s.url),
+    sameAs: [...socials, ...articles.filter((a) => a.profile)].map((s) => s.url),
   };
 
   return (

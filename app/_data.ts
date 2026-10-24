@@ -104,10 +104,14 @@ export const services: Service[] = [
 ];
 
 // Blog/article links for the homepage slider. Copy lives in _dict.ts.
-export type Article = { url: string; label: string; accent: string };
+// `profile` = our own account on that platform, listed in Organization sameAs.
+export type Article = { url: string; label: string; accent: string; profile?: true };
 
 export const articles: Article[] = [
   { url: "https://leconfidant.ai/articles", label: "leconfidant.ai", accent: "#34d399" },
+  { url: "https://mnemonicaai.substack.com/", label: "substack.com", accent: "#ff6719", profile: true },
+  { url: "https://dev.to/mnemonicaai", label: "dev.to", accent: "#818cf8", profile: true },
+  { url: "https://medium.com/@mnemonica-ai", label: "medium.com", accent: "#e5e7eb", profile: true },
 ];
 
 export type Person = {
