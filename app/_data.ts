@@ -22,20 +22,20 @@ export const apps: App[] = [
     accentText: "#6ee7b7",
   },
   {
+    name: "Oshepherd",
+    url: "https://mnemonica-ai.github.io/oshepherd/",
+    label: "mnemonica-ai.github.io",
+    monogram: "Os",
+    accent: "#fbbf24",
+    accentText: "#fcd34d",
+  },
+  {
     name: "DeepPress",
     url: "https://deeppress.mnemonica.ai/",
     label: "deeppress.mnemonica.ai",
     monogram: "Dp",
     accent: "#38bdf8",
     accentText: "#7dd3fc",
-  },
-  {
-    name: "Oshepherd",
-    url: "https://github.com/mnemonica-ai/oshepherd",
-    label: "github",
-    monogram: "Os",
-    accent: "#fbbf24",
-    accentText: "#fcd34d",
   },
   {
     name: "Taper Player",

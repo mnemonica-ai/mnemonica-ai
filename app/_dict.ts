@@ -34,12 +34,12 @@ export const dictionaries = {
           tags: ["privacy-first", "consumer", "live"],
         },
         {
-          copy: "Talk to your sites. A public registry of WordPress, Ghost & Substack sites with Model Context Protocol support — connect AI agents and chatbots to your favorite publishing platforms.",
-          tags: ["mcp", "infra", "registry"],
-        },
-        {
           copy: "Open-source FastAPI service using Celery + Redis to orchestrate multiple Ollama servers as workers. Point any Ollama client at a single endpoint.",
           tags: ["open source", "python", "llmops"],
+        },
+        {
+          copy: "Talk to your sites. A public registry of WordPress, Ghost & Substack sites with Model Context Protocol support — connect AI agents and chatbots to your favorite publishing platforms.",
+          tags: ["mcp", "infra", "registry"],
         },
         {
           copy: "Fan-made, open-source desktop player for the Aadam Jacobs Collection on the Internet Archive — built with Tauri, React and TypeScript, with a multi-theme UI and a custom HTML5 audio engine.",
@@ -338,12 +338,12 @@ export const dictionaries = {
           tags: ["privacidad ante todo", "consumo", "en vivo"],
         },
         {
-          copy: "Habla con tus sitios. Un registro público de sitios WordPress, Ghost y Substack con soporte para el Model Context Protocol — conecta agentes de IA y chatbots a tus plataformas de publicación favoritas.",
-          tags: ["mcp", "infraestructura", "registro"],
-        },
-        {
           copy: "Servicio FastAPI de código abierto que usa Celery + Redis para orquestar múltiples servidores Ollama como workers. Apunta cualquier cliente Ollama a un único endpoint.",
           tags: ["código abierto", "python", "llmops"],
+        },
+        {
+          copy: "Habla con tus sitios. Un registro público de sitios WordPress, Ghost y Substack con soporte para el Model Context Protocol — conecta agentes de IA y chatbots a tus plataformas de publicación favoritas.",
+          tags: ["mcp", "infraestructura", "registro"],
         },
         {
           copy: "Reproductor de escritorio hecho por fans y de código abierto para la Aadam Jacobs Collection de Internet Archive — construido con Tauri, React y TypeScript, con interfaz multitema y motor de audio HTML5 propio.",
